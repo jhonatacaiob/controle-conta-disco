@@ -1,16 +1,32 @@
-1\. **Controle de cotas de disco.** A ACME Inc., uma organização com mais de 1500 funcionários, está tendo problemas de espaço em disco no seu servidor de arquivos. Para tentar resolver este problema, o Administrador de Rede precisa saber qual o espaço em disco ocupado pelas contas dos usuários, e identificar os usuários com maior espaço ocupado. Através de um aplicativo baixado da Internet, ele conseguiu gerar o seguinte arquivo, chamado usuarios.txt:
 
+# Controle-conta-disco
+
+## Exercício
+
+Retirado de [lista de exercicios wiki do python brasil](https://wiki.python.org.br/ListaDeExerciciosProjetos)
+
+Utilizei esse exercício para exercitar conhecimentos que venho adquirindo ao longo dos meses
+
+
+## DESCRIÇÃO DO EXERCÍCIO
+-----
+### Controle de cotas de disco.
+A ACME Inc., uma organização com mais de 1500 funcionários, está tendo problemas de espaço em disco no seu servidor de arquivos. Para tentar resolver este problema, o Administrador de Rede precisa saber qual o espaço em disco ocupado pelas contas dos usuários, e identificar os usuários com maior espaço ocupado. Através de um aplicativo baixado da Internet, ele conseguiu gerar o seguinte arquivo, chamado usuarios.txt:
+
+```
 alexandre       456123789
 anderson        1245698456
 antonio         123456456
 carlos          91257581
 cesar           987458
 rosemary        789456125
+```
 
-* Neste arquivo, o primeiro campo corresponde ao login do usuário e o segundo ao espaço em disco ocupado pelo seu diretório **home**. A partir deste arquivo, você deve criar um programa que gere um relatório, chamado relatório.txt, no seguinte formato:
+* Neste arquivo, o primeiro campo corresponde ao login do usuário e o segundo ao espaço em disco ocupado pelo seu diretório **home**. A partir deste arquivo, você deve criar um programa que gere um relatório, chamado relatório.txt, no seguinte formato:
 
+```
 ACME Inc.           Uso do espaço em disco pelos usuários
-\------------------------------------------------------------------------
+------------------------------------------------------------------------
 Nr.  Usuário        Espaço utilizado     % do uso
 
 1    alexandre       434,99 MB            16,85%
@@ -22,17 +38,18 @@ Nr.  Usuário        Espaço utilizado     % do uso
 
 Espaço total ocupado: 2581,57 MB
 Espaço médio ocupado: 430,26 MB
+```
 
-* O arquivo de entrada deve ser lido uma única vez, e os dados armazenados em memória, caso sejam necessários, de forma a agilizar a execução do programa. A conversão da espaço ocupado em disco, de bytes para megabytes deverá ser feita através de uma função separada, que será chamada pelo programa principal. O cálculo do percentual de uso também deverá ser feito através de uma função, que será chamada pelo programa principal.
+- O arquivo de entrada deve ser lido uma única vez, e os dados armazenados em memória, caso sejam necessários, de forma a agilizar a execução do programa. A conversão da espaço ocupado em disco, de bytes para megabytes deverá ser feita através de uma função separada, que será chamada pelo programa principal. O cálculo do percentual de uso também deverá ser feito através de uma função, que será chamada pelo programa principal.
   
   **Recursos adicionais:** opcionalmente, desenvolva as seguintes funcionalidades:
 
-* Ordenar os usuários pelo percentual de espaço ocupado;
+  - Ordenar os usuários pelo percentual de espaço ocupado;
 
-* Mostrar apenas os _n_ primeiros em uso, definido pelo usuário;
+  - Mostrar apenas os _n_ primeiros em uso, definido pelo usuário;
 
-* Gerar a saída numa página html;
+  - Gerar a saída numa página html;
 
-* Criar o programa que lê as pastas e gera o arquivo inicial;
+  - Criar o programa que lê as pastas e gera o arquivo inicial;
 
-* * *
+---
