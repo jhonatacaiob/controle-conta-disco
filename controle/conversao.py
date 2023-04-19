@@ -36,3 +36,10 @@ def obtem_valor_da_porcentagem(parcial: SupportsFloat, total: SupportsFloat) -> 
         return '{:.2%}'.format(float(parcial) / float(total))
     except ValueError:
         raise ValueError("Valor não conversível para float")
+
+
+def calcular_media_total(valores: list[int]) -> tuple[str, str]:
+    total = sum(valores)
+    media = total / len(valores)
+
+    return media, total

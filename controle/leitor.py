@@ -21,3 +21,10 @@ def ler_usuario(linha_arquivo: str) -> Usuario:
         raise ValueError(
             f'Erro nos parâmetros fornecidos, o seguinte erro ocorreu: {err}'
         )
+
+
+def ler_arquivo_usuarios() -> list[Usuario]:
+    with open('archive/usuarios.txt', mode='r') as file:
+        return [
+            ler_usuario(linha) for linha in file.readlines() if linha != '\n'
+        ]
