@@ -4,19 +4,19 @@ from typing import (
 )
 
 
-def converter_bytes_para_megabytes(quantidade_bytes: SupportsInt) -> float:
-    """Converte a quantidade de bytes para megabytes. Com até duas casas de precisão.
+def converter_bytes_para_megabytes(quantidade_bytes: SupportsInt) -> str:
+    """Converte a quantidade de bytes para megabytes. Devolve uma string com até duas casas de precisão.
 
     >>> converter_bytes_para_megabytes(1048576)
-    1.0
+    '1.00 MB'
     >>> converter_bytes_para_megabytes(20971520)
-    20.0
+    '20.00 MB'
     >>> converter_bytes_para_megabytes(1000090)
-    0.95
+    '0.95 MB'
     """
     try:
-        quantidade_mega = int(quantidade_bytes) / (1024 * 1024)
-        return round(quantidade_mega, 2)
+        quantidade_megabytes = int(quantidade_bytes) / (1024 * 1024)
+        return f'{quantidade_megabytes:.2f} MB'
     except ValueError:
         raise ValueError('Valor não conversível para inteiro')
 
