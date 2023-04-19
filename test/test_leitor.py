@@ -22,4 +22,3 @@ class LeitorTest(TestCase):
 
         with self.assertRaisesRegex(ValueError, 'not enough values to unpack'):
             ler_usuario(entrada)
-

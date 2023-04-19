@@ -21,4 +21,3 @@ def ler_usuario(linha_arquivo: str) -> Usuario:
         raise ValueError(
             f'Erro nos parâmetros fornecidos, o seguinte erro ocorreu: {err}'
         )
-
