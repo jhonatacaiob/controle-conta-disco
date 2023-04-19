@@ -1,36 +1,37 @@
+import typer
+from rich.console import Console
+from rich.table import Column, Table
+
 from controle.conversao import (
     converter_bytes_para_megabytes,
     obtem_valor_da_porcentagem,
 )
 from controle.leitor import ler_usuario
 
-with open('archive/usuarios.txt', mode='r') as file:
-    usuarios = [ler_usuario(linha) for linha in file.readlines() if linha != '\n']
-
-total = sum(usuario.espaco_utilizado for usuario in usuarios)
-
-cabecalho = ('Nr.', 'Usuário', 'Espaço utilizado', '% do uso')
-linhas = [cabecalho]
-
-for index, usuario in enumerate(usuarios, start=1):
-    porcentagem = obtem_valor_da_porcentagem(usuario.espaco_utilizado, total)
-    espaco_utilizado_megabytes = converter_bytes_para_megabytes(
-        usuario.espaco_utilizado
-    )
-
-    linhas.append((index, usuario.nome, espaco_utilizado_megabytes, porcentagem))
+console = Console()
 
 
-STRING_FORMATACAO = '{:<5}{:<20}{:>20}{:>20}'
-with open('archive/relatorio.txt', mode='w', encoding='utf-8') as file:
-    linhasParaEscrever = [
-        'ACME Inc.           Uso do espaço em disco pelos usuários',
-        '-' * 65,
-        *[STRING_FORMATACAO.format(*l) for l in linhas],
-        f'Espaço total ocupado: {converter_bytes_para_megabytes(total)}',
-        f'Espaço médio ocupado: {converter_bytes_para_megabytes(total / len(usuarios))}',
-    ]
+def main():
+    table = Table('Nr.', 'Usuário', 'Espaço utilizado', '% do uso', show_lines=True)
 
-    linhasParaEscrever = [f'{linha}\n' for linha in linhasParaEscrever]
+    with open('archive/usuarios.txt', mode='r') as file:
+        usuarios = [ler_usuario(linha) for linha in file.readlines() if linha != '\n']
+        total = sum(usuario.espaco_utilizado for usuario in usuarios)
+        media = sum(usuario.espaco_utilizado for usuario in usuarios) / len(usuarios)
 
-    file.writelines(linhasParaEscrever)
+        for indice, usuario in enumerate(usuarios, start=1):
+            table.add_row(
+                str(indice),
+                usuario.nome,
+                converter_bytes_para_megabytes(usuario.espaco_utilizado),
+                obtem_valor_da_porcentagem(usuario.espaco_utilizado, total),
+            )
+
+    table.add_row('Espaço total ocupado', converter_bytes_para_megabytes(total))
+    table.add_row('Espaço médio ocupado', converter_bytes_para_megabytes(media))
+
+    console.print(table)
+
+
+if __name__ == "__main__":
+    typer.run(main)
