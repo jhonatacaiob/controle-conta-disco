@@ -15,7 +15,9 @@ def ler_usuario(linha_arquivo: str) -> Usuario:
     """
     try:
         [nome_usuario, espaco_utilizado] = linha_arquivo.split()
-        return Usuario(nome=nome_usuario, espaco_utilizado=int(espaco_utilizado))
+        return Usuario(
+            nome=nome_usuario, espaco_utilizado=int(espaco_utilizado)
+        )
 
     except ValueError as err:
         raise ValueError(

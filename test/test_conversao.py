@@ -10,27 +10,37 @@ class ConversaoTest(TestCase):
     def test_realiza_conversao(self):
         entrada = 1024 * 1024
         saida_esperada = '1.00 MB'
-        self.assertEqual(saida_esperada, converter_bytes_para_megabytes(entrada))
+        self.assertEqual(
+            saida_esperada, converter_bytes_para_megabytes(entrada)
+        )
 
     def test_deve_realizar_conversao_ao_passar_um_float(self):
         entrada = 1024.0 * 1024
         saida_esperada = '1.00 MB'
-        self.assertEqual(saida_esperada, converter_bytes_para_megabytes(entrada))
+        self.assertEqual(
+            saida_esperada, converter_bytes_para_megabytes(entrada)
+        )
 
     def test_deve_realizar_conversao_ao_passar_uma_string_conversivel(self):
         entrada = 2 * 1024 * 1024
         saida_esperada = '2.00 MB'
-        self.assertEqual(saida_esperada, converter_bytes_para_megabytes(str(entrada)))
+        self.assertEqual(
+            saida_esperada, converter_bytes_para_megabytes(str(entrada))
+        )
 
     def test_deve_realizar_conversao_e_retornar_um_valor_arredondado(self):
         entrada = 786432
         saida_esperada = '0.75 MB'
-        self.assertEqual(saida_esperada, converter_bytes_para_megabytes(entrada))
+        self.assertEqual(
+            saida_esperada, converter_bytes_para_megabytes(entrada)
+        )
 
     def test_deve_retornar_um_erro_ao_passar_um_valor_não_conversivel(self):
         entrada = 'uma_string'
 
-        with self.assertRaisesRegex(ValueError, 'Valor não conversível para inteiro'):
+        with self.assertRaisesRegex(
+            ValueError, 'Valor não conversível para inteiro'
+        ):
             converter_bytes_para_megabytes(entrada)
 
     def test_aplica_porcentagem(self):
@@ -54,5 +64,7 @@ class ConversaoTest(TestCase):
         for primeiro, segundo in entradas:
             with self.subTest(
                 primeiro=primeiro, segundo=segundo
-            ), self.assertRaisesRegex(ValueError, 'Valor não conversível para float'):
+            ), self.assertRaisesRegex(
+                ValueError, 'Valor não conversível para float'
+            ):
                 obtem_valor_da_porcentagem(primeiro, segundo)

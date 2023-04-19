@@ -7,7 +7,9 @@ from controle.usuario import Usuario
 class LeitorTest(TestCase):
     def test_devolve_dataclass_usuario(self):
         entrada = 'nome_usuario       22222222'
-        saida_esperada = Usuario(nome='nome_usuario', espaco_utilizado=22222222)
+        saida_esperada = Usuario(
+            nome='nome_usuario', espaco_utilizado=22222222
+        )
 
         self.assertEqual(saida_esperada, ler_usuario(entrada))
 
