@@ -1,6 +1,7 @@
 from typing import (
     SupportsInt,
     SupportsFloat,
+    Iterable,
 )
 
 
@@ -40,7 +41,7 @@ def obtem_valor_da_porcentagem(
         raise ValueError('Valor não conversível para float')
 
 
-def calcular_media_total(valores: list[int]) -> tuple[str, str]:
+def calcular_media_total(valores: Iterable[SupportsFloat]) -> tuple[str, str]:
     total = sum(valores)
     media = total / len(valores)
 

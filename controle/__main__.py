@@ -29,6 +29,9 @@ def main(
         'Nr.', 'Usuário', 'Espaço utilizado', '% do uso', show_lines=True
     )
 
+    media, total = calcular_media_total(
+        [usuario.espaco_utilizado for usuario in usuarios]
+    )
     for indice, usuario in enumerate(usuarios, start=1):
         table.add_row(
             str(indice),
@@ -37,9 +40,6 @@ def main(
             obtem_valor_da_porcentagem(usuario.espaco_utilizado, total),
         )
 
-    media, total = calcular_media_total(
-        [usuario.espaco_utilizado for usuario in usuarios]
-    )
     table.add_row(
         'Espaço total ocupado', converter_bytes_para_megabytes(total)
     )

@@ -1,3 +1,5 @@
+from os import PathLike
+
 from controle.usuario import Usuario
 
 
@@ -25,8 +27,14 @@ def ler_usuario(linha_arquivo: str) -> Usuario:
         )
 
 
-def ler_arquivo_usuarios() -> list[Usuario]:
-    with open('archive/usuarios.txt', mode='r') as file:
-        return [
-            ler_usuario(linha) for linha in file.readlines() if linha != '\n'
-        ]
+def ler_arquivo_usuarios(caminho: str | bytes | PathLike) -> list[Usuario]:
+    try:
+        with open(caminho, mode='r') as file:
+            usuarios = [
+                ler_usuario(linha)
+                for linha in file.readlines()
+                if linha != '\n'
+            ]
+            return usuarios
+    except:
+        raise FileNotFoundError('Arquivo informado não existe')
