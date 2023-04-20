@@ -10,14 +10,14 @@ from controle.conversao import (
 from controle.leitor import ler_arquivo_usuarios
 
 console = Console()
-
+CAMINHO_ARQUIVO = 'archive/usuarios.txt'
 
 def main(
     ordena: bool = typer.Option(
         False, '--ord', '-o', help='Ordena os usuários pelo espaço utilizado'
     )
 ):
-    usuarios = ler_arquivo_usuarios()
+    usuarios = ler_arquivo_usuarios(CAMINHO_ARQUIVO)
     if ordena:
         usuarios = sorted(
             usuarios,
@@ -41,10 +41,10 @@ def main(
         )
 
     table.add_row(
-        'Espaço total ocupado', converter_bytes_para_megabytes(total)
+        '', 'Espaço total ocupado', converter_bytes_para_megabytes(total)
     )
     table.add_row(
-        'Espaço médio ocupado', converter_bytes_para_megabytes(media)
+        '', 'Espaço médio ocupado', converter_bytes_para_megabytes(media)
     )
 
     console.print(table)
