@@ -6,7 +6,7 @@ from controle.conversao import (
 )
 
 
-class ConversaoTest(TestCase):
+class ConversaoBytesMegabytesTest(TestCase):
     def test_realiza_conversao(self):
         entrada = 1024 * 1024
         saida_esperada = '1.00 MB'
@@ -43,23 +43,36 @@ class ConversaoTest(TestCase):
         ):
             converter_bytes_para_megabytes(entrada)
 
+class ValorDaPorcentagemTest(TestCase):
     def test_aplica_porcentagem(self):
         entrada = (2, 4)
         saida_esperada = '50.00%'
-        self.assertEqual(saida_esperada, obtem_valor_da_porcentagem(*entrada))
+        self.assertEqual(
+            saida_esperada, obtem_valor_da_porcentagem(*entrada)
+        )
 
-    def test_deve_aplicar_porcentagem_quando_primeiro_for_conversivel(self):
+    def test_deve_aplicar_porcentagem_quando_primeiro_for_conversivel(
+        self,
+    ):
         entrada = ('2.0', 4)
         saida_esperada = '50.00%'
-        self.assertEqual(saida_esperada, obtem_valor_da_porcentagem(*entrada))
+        self.assertEqual(
+            saida_esperada, obtem_valor_da_porcentagem(*entrada)
+        )
 
     def test_deve_aplicar_porcentagem_quando_segundo_for_conversivel(self):
         entrada = (3, '12.0')
         saida_esperada = '25.00%'
-        self.assertEqual(saida_esperada, obtem_valor_da_porcentagem(*entrada))
+        self.assertEqual(
+            saida_esperada, obtem_valor_da_porcentagem(*entrada)
+        )
 
-    def test_deve_retornar_erro_quando_algum_valor_não_é_conversivel(self):
-        entradas = [(3, 'porta'), ('maca', 4), ('uma_string', 'duas_string')]
+    def test_deve_retornar_erro_quando_algum_valor_não_for_conversivel(self):
+        entradas = [
+            (3, 'porta'),
+            ('maca', 4),
+            ('uma_string', 'duas_string'),
+        ]
 
         for primeiro, segundo in entradas:
             with self.subTest(

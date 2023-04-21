@@ -5,7 +5,7 @@ from controle.leitor import ler_usuario, ler_arquivo_usuarios
 from controle.usuario import Usuario
 
 
-class LeitorTest(TestCase):
+class LerUsuarioTest(TestCase):
     def test_devolve_dataclass_usuario(self):
         entrada = 'nome_usuario       22222222'
         saida_esperada = Usuario(
@@ -26,6 +26,8 @@ class LeitorTest(TestCase):
         with self.assertRaisesRegex(ValueError, 'not enough values to unpack'):
             ler_usuario(entrada)
 
+
+class LerArquivoTest(TestCase):
     @patch('builtins.open', new_callable=mock_open, read_data='teste   2')
     def test_deve_chamar_o_open_com_a_string_passada_como_argumento(
         self, mock_file
