@@ -30,11 +30,7 @@ def ler_usuario(linha_arquivo: str) -> Usuario:
 def ler_arquivo_usuarios(caminho: str | bytes | PathLike) -> list[Usuario]:
     try:
         with open(caminho, mode='r') as file:
-            usuarios = [
-                ler_usuario(linha)
-                for linha in file.readlines()
-                if linha != '\n'
-            ]
+            usuarios = [ler_usuario(linha) for linha in file if linha != '\n']
             return usuarios
     except:
         raise FileNotFoundError('Arquivo informado não existe')
