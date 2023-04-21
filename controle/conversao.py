@@ -44,7 +44,10 @@ def obtem_valor_da_porcentagem(
 def calcular_media_total(
     valores: Collection[SupportsInt],
 ) -> tuple[float, int]:
-    total = sum(valores)
-    media = total / len(valores)
+    try:
+        total = sum(valores)
+        media = total / len(valores)
+    except TypeError:
+        raise TypeError('Não é póssivel converter um dos valores')
 
     return media, total
