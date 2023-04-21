@@ -8,15 +8,13 @@ from controle.conversao import (
     calcular_media_total,
 )
 from controle.leitor import ler_arquivo_usuarios
+from controle.usuario import Usuario
 
 console = Console()
 CAMINHO_ARQUIVO = 'archive/usuarios.txt'
 
-def main(
-    ordena: bool = typer.Option(
-        False, '--ord', '-o', help='Ordena os usuários pelo espaço utilizado'
-    )
-):
+
+def processa_options(ordena: bool, numero_linhas: int):
     usuarios = ler_arquivo_usuarios(CAMINHO_ARQUIVO)
     if ordena:
         usuarios = sorted(
@@ -24,15 +22,21 @@ def main(
             reverse=True,
             key=lambda usuario: usuario.espaco_utilizado,
         )
+    if numero_linhas:
+        usuarios = usuarios[:numero_linhas]
 
+    return usuarios
+
+
+def monta_table_e_exibe(lista_usuarios: list[Usuario]):
     table = Table(
         'Nr.', 'Usuário', 'Espaço utilizado', '% do uso', show_lines=True
     )
 
     media, total = calcular_media_total(
-        [usuario.espaco_utilizado for usuario in usuarios]
+        [usuario.espaco_utilizado for usuario in lista_usuarios]
     )
-    for indice, usuario in enumerate(usuarios, start=1):
+    for indice, usuario in enumerate(lista_usuarios, start=1):
         table.add_row(
             str(indice),
             usuario.nome,
@@ -48,6 +52,23 @@ def main(
     )
 
     console.print(table)
+
+
+def main(
+    ordena: bool = typer.Option(
+        False, '--ord', '-o', help='Ordena os usuários pelo espaço utilizado'
+    ),
+    numero_linhas: int = typer.Option(
+        None,
+        '--numero-linhas',
+        '-n',
+        help='Apresenta os n primeiros da lista',
+        show_default=False,
+    ),
+):
+    usuarios = processa_options(ordena=ordena, numero_linhas=numero_linhas)
+
+    monta_table_e_exibe(usuarios)
 
 
 if __name__ == '__main__':

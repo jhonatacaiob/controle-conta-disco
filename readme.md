@@ -44,12 +44,12 @@ Espaço médio ocupado: 430,26 MB
   
   **Recursos adicionais:** opcionalmente, desenvolva as seguintes funcionalidades:
 
-  - Ordenar os usuários pelo percentual de espaço ocupado;
+  - [x] Ordenar os usuários pelo percentual de espaço ocupado;
 
-  - Mostrar apenas os _n_ primeiros em uso, definido pelo usuário;
+  - [x] Mostrar apenas os _n_ primeiros em uso, definido pelo usuário;
 
-  - Gerar a saída numa página html;
+  - [ ] Gerar a saída numa página html;
 
-  - Criar o programa que lê as pastas e gera o arquivo inicial;
+  - [ ] Criar o programa que lê as pastas e gera o arquivo inicial;
 
 ---
