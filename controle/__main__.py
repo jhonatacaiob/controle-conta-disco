@@ -14,21 +14,9 @@ console = Console()
 CAMINHO_ARQUIVO = 'archive/usuarios.txt'
 
 
-def processa_options(ordena: bool, numero_linhas: int):
-    usuarios = ler_arquivo_usuarios(CAMINHO_ARQUIVO)
-    if ordena:
-        usuarios = sorted(
-            usuarios,
-            reverse=True,
-            key=lambda usuario: usuario.espaco_utilizado,
-        )
-    if numero_linhas:
-        usuarios = usuarios[:numero_linhas]
-
-    return usuarios
-
-
-def monta_table_e_exibe(lista_usuarios: list[Usuario]):
+def monta_table_e_exibe(
+    lista_usuarios: list[Usuario], numero_linhas: int | None
+):
     table = Table(
         'Nr.', 'Usuário', 'Espaço utilizado', '% do uso', show_lines=True
     )
@@ -36,6 +24,10 @@ def monta_table_e_exibe(lista_usuarios: list[Usuario]):
     media, total = calcular_media_total(
         [usuario.espaco_utilizado for usuario in lista_usuarios]
     )
+
+    if numero_linhas:
+        lista_usuarios = lista_usuarios[:numero_linhas]
+
     for indice, usuario in enumerate(lista_usuarios, start=1):
         table.add_row(
             str(indice),
@@ -66,9 +58,15 @@ def main(
         show_default=False,
     ),
 ):
-    usuarios = processa_options(ordena=ordena, numero_linhas=numero_linhas)
+    usuarios = ler_arquivo_usuarios(CAMINHO_ARQUIVO)
+    if ordena:
+        usuarios = sorted(
+            usuarios,
+            reverse=True,
+            key=lambda usuario: usuario.espaco_utilizado,
+        )
 
-    monta_table_e_exibe(usuarios)
+    monta_table_e_exibe(usuarios, numero_linhas)
 
 
 if __name__ == '__main__':
